@@ -1,8 +1,6 @@
 import { Model, Table, Column, DataType, ForeignKey, BelongsTo, AutoIncrement, PrimaryKey, AllowNull } from 'sequelize-typescript';
-import BuyingOrder from './BuyingOrder';
-import Vendor from './Vendor';
-import VendorBank from './VendorBank';
-import VendorOther from './VendorOther';
+import BuyingOrder from './PurchaseOrder';
+import Vendor from './vendor/Vendor';
 import BOInvoices from './BOInvoices';
 import BuyingOrderOther from './BuyingOrderOther';
 
@@ -82,23 +80,11 @@ export default class File extends Model {
   })
   agreementAttVendorId!: number;
 
-  @ForeignKey(() => VendorBank)
-  @Column({
-    type: DataType.INTEGER
-  })
-  vendorBankId!: number;
-
   @ForeignKey(() => BuyingOrder)
   @Column({
     type: DataType.INTEGER
   })
   buyingOrderId!: number
-
-  @ForeignKey(() => VendorOther)
-  @Column({
-    type: DataType.INTEGER
-  })
-  vendorOtherId!: number;
 
   @ForeignKey(() => BuyingOrderOther)
   @Column({
@@ -123,11 +109,4 @@ export default class File extends Model {
 
   @BelongsTo(() => Vendor, 'agreementAttVendorId')
   agreementAttVendor!: Vendor;
-
-
-  @BelongsTo(() => VendorBank)
-  vendorBank!: VendorBank
-
-  @BelongsTo(() => VendorOther)
-  vendorOther!: VendorOther
 }

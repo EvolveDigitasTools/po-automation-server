@@ -1,6 +1,6 @@
 import { Model, Table, Column, DataType, ForeignKey, HasOne, AutoIncrement, PrimaryKey, AllowNull } from 'sequelize-typescript';
 import File from './File';
-import BuyingOrder from './BuyingOrder';
+import BuyingOrder from './PurchaseOrder';
 
 @Table
 export default class BuyingOrderOther extends Model {

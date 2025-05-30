@@ -30,7 +30,7 @@ export const getInventory: RequestHandler = async (req, res) => {
                 "Model Number": details ? details.modelNumber : null,
                 "Current Inventory": sku.inventory ? sku.inventory.map(inv => ({
                     count: inv.quantity,
-                    expiry: inv.expiry,
+                    expiry: inv.expiryDate,
                 })) : []
             };
         });

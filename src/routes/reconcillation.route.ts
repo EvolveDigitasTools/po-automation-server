@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getAllPOs, getApprovedPOs, getPODetailsForReconcillation, newInvoice, updateInvoice, updateGRNData, deleteInvoice } from "../controllers/reconcillation.controller";
-import { validatePOCode, validatePOId } from "../validators/buying-order.validators";
+import { validatePOCode, validatePOId } from "../validators/purchase-order.validators";
 import { validateGRNData, validateInvoice, validateInvoiceId,  } from "../validators/reconcillation.validators";
 
 const router = Router();

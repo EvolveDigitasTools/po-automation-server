@@ -4,7 +4,8 @@ import {
 import SKU from './SKU';
 
 @Table({
-    tableName: 'inventory'
+    tableName: 'inventory',
+    timestamps: false
 })
 export default class Inventory extends Model {
     @AutoIncrement
@@ -27,9 +28,8 @@ export default class Inventory extends Model {
 
     @Column({
         type: DataType.DATE,
-        allowNull: false,
     })
-    expiry!: Date;
+    expiryDate!: Date;
 
     @BelongsTo(() => SKU)
     sku?: SKU;

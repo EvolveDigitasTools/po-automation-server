@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
-import Vendor from "../models/Vendor";
-import BuyingOrder from "../models/BuyingOrder";
-import BuyingOrderRecord from "../models/BuyingOrderRecord";
+import Vendor from "../models/vendor/Vendor";
+import BuyingOrder from "../models/PurchaseOrder";
+import BuyingOrderRecord from "../models/PurchaseOrderRecord";
 import { Sequelize } from "sequelize";
-import SKU from "../models/SKU";
+import SKU from "../models/sku/SKU";
 import BuyingOrderOther from "../models/BuyingOrderOther";
 import BOInvoices from "../models/BOInvoices";
 import File from "../models/File";
