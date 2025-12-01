@@ -38,9 +38,9 @@ app.use(upload.any());
 
 app.use('/api', routes);
 
-app.get("*", (req, res) => {
-  res.status(400).send("Page not found");
-});
+// app.get("*", (req, res) => {
+//   res.status(400).send("Backend is running");
+// });
 
 //Heath test
 app.get("/", (req, res) => {

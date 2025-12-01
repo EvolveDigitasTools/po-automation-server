@@ -55,9 +55,9 @@ const options = {
 app.use((0, cors_1.default)(options));
 app.use(upload.any());
 app.use('/api', routes_1.default);
-app.get("*", (req, res) => {
-    res.status(400).send("Page not found");
-});
+// app.get("*", (req, res) => {
+//   res.status(400).send("Backend is running");
+// });
 //Heath test
 app.get("/", (req, res) => {
     res.send("✅ Backend is running!");
