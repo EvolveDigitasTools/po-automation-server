@@ -14,7 +14,7 @@ import connection from "./db/connection"
 import routes from "./routes/routes";
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
@@ -41,6 +41,12 @@ app.use('/api', routes);
 app.get("*", (req, res) => {
   res.status(400).send("Page not found");
 });
+
+//Heath test
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running!");
+});
+
 app.listen(port, () => {
   console.log(`server is starting on port ${port}`);
 });

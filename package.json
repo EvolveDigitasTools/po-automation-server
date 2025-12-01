@@ -4,7 +4,7 @@
   "description": "Backend Service for PO Automation app",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node build/index.js",
+    "start": "cross-env NODE_ENV=production nodemon build/index.js",
     "start:dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/index.ts",
     "build": "rimraf ./build && tsc",
     "ts.check": "tsc --project tsconfig.json",

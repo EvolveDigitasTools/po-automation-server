@@ -59,7 +59,10 @@ __decorate([
 ], PurchaseOrderRecord.prototype, "purchaseOrder", void 0);
 PurchaseOrderRecord = __decorate([
     (0, sequelize_typescript_1.Table)({
-        tableName: 'purchase_order_record'
+        tableName: 'purchase_order_record',
+        timestamps: true,
+        createdAt: 'createdAt',
+        updatedAt: 'false'
     })
 ], PurchaseOrderRecord);
 exports.default = PurchaseOrderRecord;

@@ -37,7 +37,7 @@ dotenv.config({ path: path.resolve(__dirname, `../${envFile}`) });
 const connection_1 = __importDefault(require("./db/connection"));
 const routes_1 = __importDefault(require("./routes/routes"));
 const app = (0, express_1.default)();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const storage = multer_1.default.memoryStorage();
 const upload = (0, multer_1.default)({ storage: storage });
 connection_1.default.sync().then(() => {
@@ -57,6 +57,10 @@ app.use(upload.any());
 app.use('/api', routes_1.default);
 app.get("*", (req, res) => {
     res.status(400).send("Page not found");
+});
+//Heath test
+app.get("/", (req, res) => {
+    res.send("✅ Backend is running!");
 });
 app.listen(port, () => {
     console.log(`server is starting on port ${port}`);

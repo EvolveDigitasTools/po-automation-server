@@ -3,7 +3,10 @@ import SKU from './sku/SKU';
 import PurchaseOrder from './PurchaseOrder';
 
 @Table({
-    tableName: 'purchase_order_record'
+    tableName: 'purchase_order_record',
+    timestamps: true,
+    createdAt: 'createdAt',
+    updatedAt: 'false'
 })
 export default class PurchaseOrderRecord extends Model {
     @AutoIncrement
