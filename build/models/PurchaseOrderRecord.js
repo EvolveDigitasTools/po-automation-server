@@ -62,7 +62,7 @@ PurchaseOrderRecord = __decorate([
         tableName: 'purchase_order_record',
         timestamps: true,
         createdAt: 'createdAt',
-        updatedAt: 'false'
+        updatedAt: false
     })
 ], PurchaseOrderRecord);
 exports.default = PurchaseOrderRecord;

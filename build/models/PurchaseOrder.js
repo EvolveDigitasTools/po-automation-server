@@ -32,7 +32,8 @@ __decorate([
 ], PurchaseOrder.prototype, "poCode", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: true
     })
 ], PurchaseOrder.prototype, "estimatedDeliveryDate", void 0);
 __decorate([

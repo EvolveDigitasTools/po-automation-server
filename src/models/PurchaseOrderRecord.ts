@@ -6,7 +6,7 @@ import PurchaseOrder from './PurchaseOrder';
     tableName: 'purchase_order_record',
     timestamps: true,
     createdAt: 'createdAt',
-    updatedAt: 'false'
+    updatedAt: false
 })
 export default class PurchaseOrderRecord extends Model {
     @AutoIncrement

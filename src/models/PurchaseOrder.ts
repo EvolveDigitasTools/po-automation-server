@@ -24,7 +24,8 @@ export default class PurchaseOrder extends Model {
     poCode!: string
 
     @Column({
-        type: DataType.STRING
+        type: DataType.STRING,
+        allowNull: true
     })
     estimatedDeliveryDate!: string
     
