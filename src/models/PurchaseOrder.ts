@@ -23,6 +23,13 @@ export default class PurchaseOrder extends Model {
     })
     poCode!: string
 
+    @AllowNull(false)
+    @Default('Fresh')
+    @Column({
+        type: DataType.ENUM('Fresh', 'LSL')
+    })
+    poType!: 'Fresh' | 'LSL';    
+
     @Column({
         type: DataType.STRING,
         allowNull: true

@@ -41,7 +41,7 @@ const port = process.env.PORT || 4000;
 const storage = multer_1.default.memoryStorage();
 const upload = (0, multer_1.default)({ storage: storage });
 connection_1.default.sync().then(() => {
-    console.log("Database synced successfully");
+    // console.log("Database synced successfully");
 });
 const allowedOrigins = [
     'https://vendor-registration.globalplugin.com',

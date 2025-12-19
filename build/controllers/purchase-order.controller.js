@@ -26,7 +26,7 @@ const SKUDetails_1 = __importDefault(require("../models/sku/SKUDetails"));
 const newPurchaseOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const transaction = yield connection_1.default.transaction();
     try {
-        const { poCode, currency, paymentTerms, estimatedDeliveryDate, records, vendorCode, createdBy } = req.body;
+        const { poCode, poType, currency, paymentTerms, estimatedDeliveryDate, records, vendorCode, createdBy } = req.body;
         // Retrieve the vendor and its corresponding profile (1:1 mapping)
         const vendor = yield Vendor_1.default.findOne({ where: { vendorCode }, transaction });
         if (!vendor) {
@@ -41,6 +41,7 @@ const newPurchaseOrder = (req, res) => __awaiter(void 0, void 0, void 0, functio
         // Create the Purchase Order with the vendor profile ID
         const purchaseOrder = yield PurchaseOrder_2.default.create({
             poCode,
+            poType,
             currency,
             paymentTerms,
             estimatedDeliveryDate,

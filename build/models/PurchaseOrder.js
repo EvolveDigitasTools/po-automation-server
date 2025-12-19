@@ -31,6 +31,13 @@ __decorate([
     })
 ], PurchaseOrder.prototype, "poCode", void 0);
 __decorate([
+    (0, sequelize_typescript_1.AllowNull)(false),
+    (0, sequelize_typescript_1.Default)('Fresh'),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.ENUM('Fresh', 'LSL')
+    })
+], PurchaseOrder.prototype, "poType", void 0);
+__decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
         allowNull: true

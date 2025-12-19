@@ -19,7 +19,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 connection.sync().then(() => {
-  console.log("Database synced successfully");
+  // console.log("Database synced successfully");
 });
 
 const allowedOrigins = [

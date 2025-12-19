@@ -13,7 +13,7 @@ import SKUDetails from "../models/sku/SKUDetails";
 export const newPurchaseOrder: RequestHandler = async (req, res) => {
     const transaction = await connection.transaction();
     try {
-        const { poCode, currency, paymentTerms, estimatedDeliveryDate, records, vendorCode, createdBy } = req.body;
+        const { poCode, poType, currency, paymentTerms, estimatedDeliveryDate, records, vendorCode, createdBy } = req.body;
 
         // Retrieve the vendor and its corresponding profile (1:1 mapping)
         const vendor = await Vendor.findOne({ where: { vendorCode }, transaction });
@@ -31,6 +31,7 @@ export const newPurchaseOrder: RequestHandler = async (req, res) => {
         // Create the Purchase Order with the vendor profile ID
         const purchaseOrder = await PurchaseOrder.create({
             poCode,
+            poType,
             currency,
             paymentTerms,
             estimatedDeliveryDate,
