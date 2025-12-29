@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
 const SKU_1 = __importDefault(require("./sku/SKU"));
 const PurchaseOrder_1 = __importDefault(require("./PurchaseOrder"));
+const PurchaseOrderGRN_1 = __importDefault(require("./PurchaseOrderGRN"));
 let PurchaseOrderRecord = class PurchaseOrderRecord extends sequelize_typescript_1.Model {
 };
 __decorate([
@@ -57,6 +58,20 @@ __decorate([
 __decorate([
     (0, sequelize_typescript_1.BelongsTo)(() => PurchaseOrder_1.default)
 ], PurchaseOrderRecord.prototype, "purchaseOrder", void 0);
+__decorate([
+    (0, sequelize_typescript_1.ForeignKey)(() => PurchaseOrderGRN_1.default),
+    (0, sequelize_typescript_1.AllowNull)(true),
+    (0, sequelize_typescript_1.Column)(sequelize_typescript_1.DataType.INTEGER)
+], PurchaseOrderRecord.prototype, "grnId", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsTo)(() => PurchaseOrderGRN_1.default)
+], PurchaseOrderRecord.prototype, "grn", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DECIMAL(5, 2),
+        allowNull: true,
+    })
+], PurchaseOrderRecord.prototype, "shelfLifePercent", void 0);
 PurchaseOrderRecord = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'purchase_order_record',

@@ -1,6 +1,7 @@
 import { Model, Table, Column, DataType, ForeignKey, AllowNull, AutoIncrement, PrimaryKey, BelongsTo } from 'sequelize-typescript';
 import SKU from './sku/SKU';
 import PurchaseOrder from './PurchaseOrder';
+import PurchaseOrderGRN from "./PurchaseOrderGRN";
 
 @Table({
     tableName: 'purchase_order_record',
@@ -50,5 +51,20 @@ export default class PurchaseOrderRecord extends Model {
     sku!: SKU
 
     @BelongsTo(() => PurchaseOrder)
-    purchaseOrder!: PurchaseOrder
+    purchaseOrder!: PurchaseOrder;
+
+    @ForeignKey(() => PurchaseOrderGRN)
+    @AllowNull(true)
+    @Column(DataType.INTEGER)
+    grnId!: number | null;
+
+    @BelongsTo(() => PurchaseOrderGRN)
+    grn?: PurchaseOrderGRN;
+
+    @Column({
+    type: DataType.DECIMAL(5,2),
+    allowNull: true,
+    })
+    shelfLifePercent!: number | null;
+
 }

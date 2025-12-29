@@ -19,6 +19,7 @@ const validateNew = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     try {
         const newPurchaseOrderSchema = joi_1.default.object({
             poCode: joi_1.default.string().required(),
+            poType: joi_1.default.string().required(),
             currency: joi_1.default.string().required(),
             paymentTerms: joi_1.default.string(),
             estimatedDeliveryDate: joi_1.default.string(),
@@ -26,8 +27,10 @@ const validateNew = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             vendorCode: joi_1.default.string(),
             createdBy: joi_1.default.string().email().required()
         });
-        yield newPurchaseOrderSchema.validateAsync(req.body);
-        next();
+        yield newPurchaseOrderSchema.validateAsync(req.body, {
+            abortEarly: false,
+        });
+        return next();
     }
     catch (error) {
         return res.status(504).json({

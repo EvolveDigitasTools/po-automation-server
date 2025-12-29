@@ -6,6 +6,7 @@ export const validateNew: RequestHandler = async (req, res, next) => {
     try {
         const newPurchaseOrderSchema = Joi.object({
             poCode: Joi.string().required(),
+            poType: Joi.string().required(),
             currency: Joi.string().required(),
             paymentTerms: Joi.string(),
             estimatedDeliveryDate: Joi.string(),
@@ -13,8 +14,12 @@ export const validateNew: RequestHandler = async (req, res, next) => {
             vendorCode: Joi.string(),
             createdBy: Joi.string().email().required()
         });
-        await newPurchaseOrderSchema.validateAsync(req.body);
-        next();
+        
+        await newPurchaseOrderSchema.validateAsync(req.body, {
+            abortEarly: false,
+        });
+
+        return next();
 
     } catch (error: any) {
         return res.status(504).json({

@@ -52,7 +52,7 @@ export const newInvoice: RequestHandler = async (req, res) => {
             const skuId = skuMap.get(record.skuCode);
             if (!skuId) return null; // Skip if SKU not found
 
-            console.log(`Updating SKU: ${record.skuCode}, Received: ${record.receivedQty}, Damaged: ${record.damaged}, purchaseOrderId: ${purchaseOrder?.id}, skuId: ${skuId}`);
+            // console.log(`Updating SKU: ${record.skuCode}, Received: ${record.receivedQty}, Damaged: ${record.damaged}, purchaseOrderId: ${purchaseOrder?.id}, skuId: ${skuId}`);
 
             return PurchaseOrderRecord.update(
                 {

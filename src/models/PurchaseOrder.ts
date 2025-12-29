@@ -3,6 +3,7 @@ import AttachmentMapping from './attachment/AttachmentMapping';
 import PurchaseOrderRecord from './PurchaseOrderRecord';
 import VendorProfile from './vendor/VendorProfile';
 import Invoice from './Invoice';
+import PurchaseOrderGRN from './PurchaseOrderGRN';
 
 @Table({
     tableName: 'purchase_order',
@@ -81,4 +82,14 @@ export default class PurchaseOrder extends Model {
 
     @BelongsTo(() => VendorProfile)
     vendorProfile?: VendorProfile;
+
+    @HasMany(() => PurchaseOrderGRN)
+    grns!: PurchaseOrderGRN[];
+
+    @AllowNull(true)
+    @Column({
+    type: DataType.INTEGER,
+    comment: 'Self reference for LSL master PO'
+    })
+    parentPoId!: number | null;
 }

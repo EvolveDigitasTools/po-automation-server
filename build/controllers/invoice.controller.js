@@ -52,7 +52,7 @@ const newInvoice = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             const skuId = skuMap.get(record.skuCode);
             if (!skuId)
                 return null; // Skip if SKU not found
-            console.log(`Updating SKU: ${record.skuCode}, Received: ${record.receivedQty}, Damaged: ${record.damaged}, purchaseOrderId: ${purchaseOrder === null || purchaseOrder === void 0 ? void 0 : purchaseOrder.id}, skuId: ${skuId}`);
+            // console.log(`Updating SKU: ${record.skuCode}, Received: ${record.receivedQty}, Damaged: ${record.damaged}, purchaseOrderId: ${purchaseOrder?.id}, skuId: ${skuId}`);
             return PurchaseOrderRecord_1.default.update({
                 receivedQty: record.receivedQty,
                 damaged: record.damaged

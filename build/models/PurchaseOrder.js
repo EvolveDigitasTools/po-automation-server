@@ -14,6 +14,7 @@ const AttachmentMapping_1 = __importDefault(require("./attachment/AttachmentMapp
 const PurchaseOrderRecord_1 = __importDefault(require("./PurchaseOrderRecord"));
 const VendorProfile_1 = __importDefault(require("./vendor/VendorProfile"));
 const Invoice_1 = __importDefault(require("./Invoice"));
+const PurchaseOrderGRN_1 = __importDefault(require("./PurchaseOrderGRN"));
 let PurchaseOrder = class PurchaseOrder extends sequelize_typescript_1.Model {
 };
 __decorate([
@@ -89,6 +90,16 @@ __decorate([
 __decorate([
     (0, sequelize_typescript_1.BelongsTo)(() => VendorProfile_1.default)
 ], PurchaseOrder.prototype, "vendorProfile", void 0);
+__decorate([
+    (0, sequelize_typescript_1.HasMany)(() => PurchaseOrderGRN_1.default)
+], PurchaseOrder.prototype, "grns", void 0);
+__decorate([
+    (0, sequelize_typescript_1.AllowNull)(true),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        comment: 'Self reference for LSL master PO'
+    })
+], PurchaseOrder.prototype, "parentPoId", void 0);
 PurchaseOrder = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'purchase_order',
