@@ -52,6 +52,8 @@ const allowedOrigins = [
 const options = {
     origin: allowedOrigins
 };
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)(options));
 app.use(upload.any());
 app.use('/api', routes_1.default);

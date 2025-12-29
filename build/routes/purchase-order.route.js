@@ -8,4 +8,5 @@ router.post('/new', purchase_order_validators_1.validateNew, purchase_order_cont
 router.get('/', purchase_order_controller_1.getUniquePOCodeRoute);
 router.post('/review', purchase_order_validators_1.validateReview, purchase_order_controller_1.applyReview);
 router.get('/:poCode', purchase_order_validators_1.validatePOCode, purchase_order_controller_1.getPODetails);
+router.post("/sku/validate", purchase_order_controller_1.validateSKUs);
 exports.default = router;

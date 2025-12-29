@@ -445,6 +445,31 @@ export const getPODetails: RequestHandler = async (req, res) => {
     }
 }
 
+export const validateSKUs: RequestHandler = async (req, res) => {
+  const skuCodes = req.body?.skuCodes;
+
+  if (!Array.isArray(skuCodes) || skuCodes.length === 0) {
+    return res.status(400).json({
+      success: false,
+      message: "skuCodes array required",
+    });
+  }
+
+  const existingSKUs = await SKU.findAll({
+    where: { skuCode: skuCodes },
+    attributes: ["skuCode"],
+  });
+
+  const existingSet = new Set(existingSKUs.map(s => s.skuCode));
+  const missingSKUs = skuCodes.filter(code => !existingSet.has(code));
+
+  return res.json({
+    success: true,
+    missingSKUs,
+  });
+};
+
+
 const getUniquePOCode = async () => {
     let poCode, existingPO
     do {

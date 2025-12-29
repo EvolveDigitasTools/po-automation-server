@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPODetails = exports.applyReview = exports.getUniquePOCodeRoute = exports.newPurchaseOrder = void 0;
+exports.validateSKUs = exports.getPODetails = exports.applyReview = exports.getUniquePOCodeRoute = exports.newPurchaseOrder = void 0;
 const Vendor_1 = __importDefault(require("../models/vendor/Vendor"));
 const PurchaseOrder_1 = __importDefault(require("../models/PurchaseOrder"));
 const SKU_1 = __importDefault(require("../models/sku/SKU"));
@@ -381,6 +381,27 @@ const getPODetails = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getPODetails = getPODetails;
+const validateSKUs = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _d;
+    const skuCodes = (_d = req.body) === null || _d === void 0 ? void 0 : _d.skuCodes;
+    if (!Array.isArray(skuCodes) || skuCodes.length === 0) {
+        return res.status(400).json({
+            success: false,
+            message: "skuCodes array required",
+        });
+    }
+    const existingSKUs = yield SKU_1.default.findAll({
+        where: { skuCode: skuCodes },
+        attributes: ["skuCode"],
+    });
+    const existingSet = new Set(existingSKUs.map(s => s.skuCode));
+    const missingSKUs = skuCodes.filter(code => !existingSet.has(code));
+    return res.json({
+        success: true,
+        missingSKUs,
+    });
+});
+exports.validateSKUs = validateSKUs;
 const getUniquePOCode = () => __awaiter(void 0, void 0, void 0, function* () {
     let poCode, existingPO;
     do {
