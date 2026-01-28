@@ -20,6 +20,12 @@ export default class PurchaseOrderRecord extends Model {
     @AllowNull(false)
     @Column({ type: DataType.INTEGER })
     expectedQty!: number;
+
+    @AllowNull(true)
+    @Column({
+    type: DataType.DECIMAL(10, 2),
+    })
+    mrp!: number | null;
     
     @AllowNull(false)
     @Column({ type: DataType.DECIMAL(10, 2) })

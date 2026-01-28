@@ -27,6 +27,12 @@ __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER })
 ], PurchaseOrderRecord.prototype, "expectedQty", void 0);
 __decorate([
+    (0, sequelize_typescript_1.AllowNull)(true),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DECIMAL(10, 2),
+    })
+], PurchaseOrderRecord.prototype, "mrp", void 0);
+__decorate([
     (0, sequelize_typescript_1.AllowNull)(false),
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.DECIMAL(10, 2) })
 ], PurchaseOrderRecord.prototype, "unitCost", void 0);
