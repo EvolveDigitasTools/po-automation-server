@@ -127,6 +127,7 @@ export const newPurchaseOrder: RequestHandler = async (req, res) => {
     const skuMap = new Map(skus.map((s) => [s.skuCode, s]));
 
     /* ===================== PREPARE PO RECORDS ===================== */
+    const skuDetailsBulk: any[] = [];
     const purchaseRecordsData: any[] = [];
 
     for (const record of orderRecords) {
@@ -141,14 +142,13 @@ export const newPurchaseOrder: RequestHandler = async (req, res) => {
         });
       }
 
-      await SKUDetails.upsert(
+      skuDetailsBulk.push(
         {
           skuId: sku.id,
           gst: record.gst,
           mrp: record.mrp,
           createdBy,
-        },
-        { transaction }
+        }
       );
 
        /* ===================== Shelf Life % ===================== */
@@ -184,6 +184,13 @@ export const newPurchaseOrder: RequestHandler = async (req, res) => {
     }
 
     /* ===================== INSERT RECORDS ===================== */
+    await SKUDetails.bulkCreate(skuDetailsBulk, {
+      updateOnDuplicate: ["gst", "mrp", "createdBy"],
+      transaction,
+    });
+    
+    console.log("✅ SKUDetails upserted");
+
     await PurchaseOrderRecord.bulkCreate(purchaseRecordsData, {
       transaction,
     });

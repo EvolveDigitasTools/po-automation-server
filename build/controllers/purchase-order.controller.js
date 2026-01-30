@@ -111,6 +111,7 @@ const newPurchaseOrder = (req, res) => __awaiter(void 0, void 0, void 0, functio
         });
         const skuMap = new Map(skus.map((s) => [s.skuCode, s]));
         /* ===================== PREPARE PO RECORDS ===================== */
+        const skuDetailsBulk = [];
         const purchaseRecordsData = [];
         for (const record of orderRecords) {
             const skuCode = String(record.skuCode).trim();
@@ -122,12 +123,12 @@ const newPurchaseOrder = (req, res) => __awaiter(void 0, void 0, void 0, functio
                     message: `SKU not found: ${skuCode}`,
                 });
             }
-            yield SKUDetails_1.default.upsert({
+            skuDetailsBulk.push({
                 skuId: sku.id,
                 gst: record.gst,
                 mrp: record.mrp,
                 createdBy,
-            }, { transaction });
+            });
             /* ===================== Shelf Life % ===================== */
             const rawShelfLife = (_a = record.shelfLifePercent) !== null && _a !== void 0 ? _a : record.shelfLifePercentage;
             let shelfLifePercent = null;
@@ -156,6 +157,11 @@ const newPurchaseOrder = (req, res) => __awaiter(void 0, void 0, void 0, functio
             });
         }
         /* ===================== INSERT RECORDS ===================== */
+        yield SKUDetails_1.default.bulkCreate(skuDetailsBulk, {
+            updateOnDuplicate: ["gst", "mrp", "createdBy"],
+            transaction,
+        });
+        console.log("✅ SKUDetails upserted");
         yield PurchaseOrderRecord_1.default.bulkCreate(purchaseRecordsData, {
             transaction,
         });
